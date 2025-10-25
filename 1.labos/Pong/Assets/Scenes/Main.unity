@@ -924,7 +924,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfd43bb5e7b75b49841e99b013e6e43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RacketBehaviour
-  speed: 30
+  speed: 20
   input_axis_name: Vertical
 --- !u!1 &1330466188
 GameObject:
@@ -1241,7 +1241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfd43bb5e7b75b49841e99b013e6e43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RacketBehaviour
-  speed: 30
+  speed: 20
   input_axis_name: Vertical2
 --- !u!1 &1727875536
 GameObject:
