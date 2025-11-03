@@ -8,6 +8,8 @@ TagManager:
   - FallenOffTag
   - CoinTag
   - KepecTag
+  - SpikeTag
+  - EndTag
   layers:
   - Default
   - TransparentFX

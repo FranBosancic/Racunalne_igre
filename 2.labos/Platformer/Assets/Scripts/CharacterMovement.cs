@@ -40,7 +40,18 @@ public class CharacterMovement : MonoBehaviour
         {
             isGrounded = true;
         }
+
         if (collision.gameObject.CompareTag("FallenOffTag"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        if (collision.gameObject.CompareTag("SpikeTag"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        if (collision.gameObject.CompareTag("EndTag"))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
