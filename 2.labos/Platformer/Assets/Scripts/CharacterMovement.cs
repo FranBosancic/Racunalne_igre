@@ -7,7 +7,8 @@ public class CharacterMovement : MonoBehaviour
     public float jumpForce = 8f;
     private bool isGrounded = false;
     private Rigidbody2D rb;
-
+    public Animator animator;
+    public SpriteRenderer spriteRenderer;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -22,8 +23,27 @@ public class CharacterMovement : MonoBehaviour
     void Move()
     {
         float moveInput = Input.GetAxis("Horizontal");
-        Vector3 movement = new Vector3(moveInput, 0f, 0f);
-        transform.position += movement * Time.deltaTime * moveSpeed;
+        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
+
+
+        if (moveInput != 0)
+        {
+            animator.SetBool("isRunning", true);
+        }
+        else
+        {
+            animator.SetBool("isRunning", false);
+        }
+
+        if (moveInput > 0)
+        {
+            spriteRenderer.flipX = false;
+        }
+        else if (moveInput < 0)
+        {
+            spriteRenderer.flipX = true;  // gleda lijevo
+        }
+            
     }
 
     void Jump()
@@ -31,6 +51,8 @@ public class CharacterMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+            isGrounded = false;
+            animator.SetBool("isJumping", !isGrounded);
         }
     }
 
@@ -39,6 +61,7 @@ public class CharacterMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
+            animator.SetBool("isJumping", !isGrounded);
         }
 
         if (collision.gameObject.CompareTag("FallenOffTag"))
