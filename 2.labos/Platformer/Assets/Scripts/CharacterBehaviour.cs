@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class CharacterMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float jumpForce = 8f;
-
+    public GameObject deathUI;
+    public TextMeshProUGUI timerText;
     private float moveInput;
     private bool isGrounded;
 
@@ -60,8 +62,21 @@ public class CharacterMovement : MonoBehaviour
             collision.gameObject.CompareTag("SpikeTag") ||
             collision.gameObject.CompareTag("EndTag"))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            deathUI.SetActive(true);
+            float timer = 5.0f;
+            Time.timeScale = 0f;
+            if (timer > 0)
+            {
+                timer -= Time.deltaTime;
+                timerText.text = timer.ToString("0.00");  
+            }
+            else 
+            { 
+                deathUI.SetActive(false);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
         }
+
     }
 
     void OnCollisionExit2D(Collision2D collision)
